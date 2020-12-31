@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
   def create
-    user = User.find_or_create_by(uid: request_hash[:uid]) do |user|
-      user.username = request_hash[:info][:nickname]
-      user.token = request_hash[:credentials][:token]
-      user.save
-    end
+    user = User.find_or_create_by(uid: request_hash[:uid])
+    user.uid = request_hash[:uid]
+    user.username = request_hash[:info][:nickname]
+    user.token = request_hash[:credentials][:token]
+    user.save
 
     session[:user_id] = user.id
 
